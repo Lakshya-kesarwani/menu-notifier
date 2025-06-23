@@ -38,8 +38,9 @@ function formatMeal(day, meal) {
   return dayMenu[meal.toLowerCase()];
 }
 
-function notifyMeal(meal) {
-  const today = new Date().toLocaleString("en-US", { weekday: "long" }).toLowerCase();
+function notifyMeal(meal) {  
+  const indiaDate = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" }));
+  const today = indiaDate.toLocaleString("en-US", { weekday: "long" }).toLowerCase();
   const title = `🍽️ ${meal} Reminder - ${today}`;
   const body = formatMeal(today, meal);
   sendPush(title, body);
@@ -50,7 +51,7 @@ cron.schedule("15 7 * * 1-5", () => notifyMeal("Breakfast"),{ timezone: "Asia/Ko
 cron.schedule("45 7 * * 6,0", () => notifyMeal("Breakfast"),{ timezone: "Asia/Kolkata"}); // Sat-Sun 7:45
 cron.schedule("10 12 * * *", () => notifyMeal("Lunch"),{ timezone: "Asia/Kolkata"});      // Daily 12:10
 cron.schedule("0 16 * * *", () => notifyMeal("Snacks"),{ timezone: "Asia/Kolkata"});      // Daily 16:00
-cron.schedule("0 23 * * *", () => notifyMeal("Dinner"),{ timezone: "Asia/Kolkata"});     // Daily 19:41
+cron.schedule("23 23 * * *", () => notifyMeal("Dinner"),{ timezone: "Asia/Kolkata"});     // Daily 19:41
 
 // 🏠 Route
 app.get("/", (req, res) => {
