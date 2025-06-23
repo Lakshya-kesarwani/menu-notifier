@@ -1,0 +1,6 @@
+Flask
+werkzeug==2.3.8
+gunicorn
+apscheduler
+requests
+python-dotenv
