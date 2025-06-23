@@ -46,22 +46,15 @@ function notifyMeal(meal) {
 }
 
 // ⏰ Schedule notifications
-cron.schedule("15 7 * * 1-5", () => notifyMeal("Breakfast")); // Mon-Fri 7:15
-cron.schedule("45 7 * * 6,0", () => notifyMeal("Breakfast")); // Sat-Sun 7:45
-cron.schedule("10 12 * * *", () => notifyMeal("Lunch"));      // Daily 12:10
-cron.schedule("0 16 * * *", () => notifyMeal("Snacks"));      // Daily 16:00
-cron.schedule("47 22 * * *", () => notifyMeal("Dinner"));     // Daily 19:41
+cron.schedule("15 7 * * 1-5", () => notifyMeal("Breakfast"),{ timezone: "Asia/Kolkata"}); // Mon-Fri 7:15
+cron.schedule("45 7 * * 6,0", () => notifyMeal("Breakfast"),{ timezone: "Asia/Kolkata"}); // Sat-Sun 7:45
+cron.schedule("10 12 * * *", () => notifyMeal("Lunch"),{ timezone: "Asia/Kolkata"});      // Daily 12:10
+cron.schedule("0 16 * * *", () => notifyMeal("Snacks"),{ timezone: "Asia/Kolkata"});      // Daily 16:00
+cron.schedule("0 23 * * *", () => notifyMeal("Dinner"),{ timezone: "Asia/Kolkata"});     // Daily 19:41
 
 // 🏠 Route
 app.get("/", (req, res) => {
   res.send("Server is running");
-});
-
-app.get("/debug-env", (req, res) => {
-  res.json({
-    token: process.env.PUSHBULLET_TOKEN,
-    env: process.env
-  });
 });
 
 
