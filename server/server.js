@@ -56,7 +56,12 @@ cron.schedule("0 23 * * *", () => notifyMeal("Dinner"),{ timezone: "Asia/Kolkata
 app.get("/", (req, res) => {
   res.send("Server is running");
 });
-
+app.get("/debug-time", (req, res) => {
+  res.json({
+    serverTime: new Date(),
+    indiaTime: new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
+  });
+});
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
