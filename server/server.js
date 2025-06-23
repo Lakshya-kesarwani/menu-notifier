@@ -57,6 +57,14 @@ app.get("/", (req, res) => {
   res.send("Server is running");
 });
 
+app.get("/debug-env", (req, res) => {
+  res.json({
+    token: process.env.PUSHBULLET_TOKEN,
+    env: process.env
+  });
+});
+
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
